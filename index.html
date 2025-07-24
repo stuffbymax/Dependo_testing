@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Game Dependencies</title>
+  <style>
+    body { font-family: Arial; padding: 20px; }
+    input { padding: 10px; width: 300px; }
+    .game { margin-top: 20px; }
+  </style>
+</head>
+<body>
+  <h1>Game Dependency Checker</h1>
+  <input id="search" type="text" placeholder="Search for a game..." />
+  <div id="result"></div>
+
+  <script>
+    let games = [];
+
+    fetch('https://raw.githubusercontent.com/yourname/game-dependencies-db/main/games.json')
+      .then(res => res.json())
+      .then(data => {
+        games = data;
+        document.getElementById('search').addEventListener('input', function () {
+          const name = this.value.toLowerCase();
+          const game = games.find(g => g.name.toLowerCase().includes(name));
+          const result = document.getElementById('result');
+          result.innerHTML = game ? `
+            <div class="game">
+              <h2>${game.name}</h2>
+              <p><strong>DirectX:</strong> ${game.directx}</p>
+              <p><strong>VC++:</strong> ${game.vcredist.join(', ')}</p>
+              <p><strong>.NET:</strong> ${game.dotnet}</p>
+              <p><strong>Missing DLLs:</strong> ${game.dlls.join(', ')}</p>
+              <p><strong>Fixes:</strong><ul>${game.fixes.map(f => `<li>${f}</li>`).join('')}</ul></p>
+              <p><strong>Download Links:</strong></p>
+              <ul>
+                <li><a href="${game.downloads.directx}">DirectX</a></li>
+                ${Object.entries(game.downloads.vcredist).map(([year, link]) =>
+                  `<li><a href="${link}">VC++ ${year}</a></li>`).join('')}
+                <li><a href="${game.downloads.dotnet}">.NET Framework</a></li>
+              </ul>
+            </div>` : `<p>No game found.</p>`;
+        });
+      });
+  </script>
+</body>
+</html>
