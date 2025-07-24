@@ -1,0 +1,133 @@
+body {
+  font-family: Arial, sans-serif;
+  background: #121212;
+  color: #ddd;
+
+  margin: 0;
+  min-height: 100vh;
+
+  display: flex;
+  justify-content: center;  /* center horizontally */
+  align-items: center;      /* center vertically */
+  padding: 20px;
+}
+
+.container {
+  width: 100%;
+  max-width: 900px;       /* bigger max width for bigger cards */
+  text-align: center;
+}
+
+#gameList {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(600px, 1fr)); /* wide columns */
+  gap: 30px;
+  justify-content: center;
+  padding: 20px 0;
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+.game {
+  width: 100%;
+  min-height: 200px;
+  background: #1e1e1e;
+  border: 3px solid #4da6ff;
+  padding: 20px 30px;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(77, 166, 255, 0.7);
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+}
+
+.game img {
+  width: 200px;    /* bigger image */
+  height: 200px;
+  object-fit: contain;
+  border-radius: 12px;
+  box-shadow: 0 0 15px #4da6ff;
+}
+
+.game-info {
+  width: 100%;
+  text-align: center;
+  font-size: 20px;    /* larger font */
+  line-height: 1.6;
+}
+
+.game-info h2 {
+  font-size: 34px;    /* big title */
+  margin-top: 0;
+  color: #4da6ff;
+}
+
+.details {
+  display: none;
+  margin-top: 20px;
+  text-align: center;
+  font-size: 18px;
+  line-height: 1.6;
+}
+
+.details.show {
+  display: block;
+}
+
+button {
+  margin-top: 15px;
+  cursor: pointer;
+  background-color: #4da6ff;
+  color: white;
+  border: none;
+  padding: 12px 28px;    /* bigger button */
+  border-radius: 6px;
+  font-size: 18px;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #3399ff;
+}
+
+ul {
+  padding-left: 20px;
+  font-size: 18px;
+}
+
+a {
+  font-size: 18px;
+  color: #4da6ff;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+.big-blue-search {
+  width: 100%;
+  max-width: 600px;
+  height: 60px;
+  font-size: 24px;
+  padding: 0 20px;
+  border: none;
+  border-radius: 12px;
+  background-color: #007BFF; /* Bright blue */
+  color: white;
+  box-shadow: 0 4px 12px rgba(0, 123, 255, 0.5);
+  outline: none;
+  transition: box-shadow 0.3s ease;
+}
+
+.big-blue-search::placeholder {
+  color: rgba(255, 255, 255, 0.75);
+}
+
+.big-blue-search:focus {
+  box-shadow: 0 0 8px 3px #0056b3;
+}
+
