@@ -16,7 +16,7 @@
   <script>
     let games = [];
 
-    fetch('https://raw.githubusercontent.com/yourname/game-dependencies-db/main/games.json')
+    fetch('https://github.com/stuffbymax/game-dependencies-db/blob/main/games.json')
       .then(res => res.json())
       .then(data => {
         games = data;
