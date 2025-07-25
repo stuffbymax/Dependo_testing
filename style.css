@@ -1,111 +1,59 @@
+:root {
+  --bg-dark: #121212;
+  --text-dark: #ddd;
+  --card-bg-dark: #1e1e1e;
+  --border-color: #4da6ff;
+  --bg-light: #f8f8f8;
+  --text-light: #222;
+  --card-bg-light: #fff;
+}
+
 body {
   font-family: Arial, sans-serif;
-  background: #121212;
-  color: #ddd;
-
+  background-color: var(--bg-dark);
+  color: var(--text-dark);
   margin: 0;
   min-height: 100vh;
-
-  display: flex;
-  justify-content: center;  /* center horizontally */
-  align-items: center;      /* center vertically */
-  padding: 20px;
-}
-
-.container {
-  width: 100%;
-  max-width: 900px;       /* bigger max width for bigger cards */
-  text-align: center;
-}
-
-#gameList {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(600px, 1fr)); /* wide columns */
-  gap: 30px;
-  justify-content: center;
-  padding: 20px 0;
-  width: 100%;
-  max-width: 1280px;
-  margin: 0 auto;
-}
-
-.game {
-  width: 100%;
-  min-height: 200px;
-  background: #1e1e1e;
-  border: 3px solid #4da6ff;
-  padding: 20px 30px;
-  border-radius: 12px;
-  box-shadow: 0 4px 20px rgba(77, 166, 255, 0.7);
-
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 15px;
+  padding: 20px;
+  transition: background-color 0.3s, color 0.3s;
 }
 
-.game img {
-  width: 200px;    /* bigger image */
-  height: 200px;
-  object-fit: contain;
-  border-radius: 12px;
-  box-shadow: 0 0 15px #4da6ff;
+body.light-mode {
+  background-color: var(--bg-light);
+  color: var(--text-light);
 }
 
-.game-info {
-  width: 100%;
-  text-align: center;
-  font-size: 20px;    /* larger font */
-  line-height: 1.6;
-}
-
-.game-info h2 {
-  font-size: 34px;    /* big title */
-  margin-top: 0;
-  color: #4da6ff;
-}
-
-.details {
-  display: none;
-  margin-top: 20px;
-  text-align: center;
-  font-size: 18px;
-  line-height: 1.6;
-}
-
-.details.show {
-  display: block;
-}
-
-button {
-  margin-top: 15px;
-  cursor: pointer;
+.mode-toggle {
+  position: fixed;
+  top: 10px;
+  left: 10px;
+  transform: none; /* Remove vertical translate */
   background-color: #4da6ff;
   color: white;
   border: none;
-  padding: 12px 28px;    /* bigger button */
   border-radius: 6px;
-  font-size: 18px;
+  padding: 12px 18px;
+  cursor: pointer;
+  font-size: 16px;
+  box-shadow: 0 4px 12px rgba(77, 166, 255, 0.6);
   transition: background-color 0.3s ease;
+  z-index: 1000;
+  width: max-content;
+  white-space: nowrap;
 }
 
-button:hover {
-  background-color: #3399ff;
+
+.container {
+  width: 100%;
+  max-width: 900px;
+  text-align: center;
 }
 
-ul {
-  padding-left: 20px;
-  font-size: 18px;
-}
-
-a {
-  font-size: 18px;
-  color: #4da6ff;
-  text-decoration: none;
-}
-
-a:hover {
-  text-decoration: underline;
+h1 {
+  margin-bottom: 10px;
 }
 
 .big-blue-search {
@@ -116,11 +64,12 @@ a:hover {
   padding: 0 20px;
   border: none;
   border-radius: 12px;
-  background-color: #007BFF; /* Bright blue */
+  background-color: #007BFF;
   color: white;
   box-shadow: 0 4px 12px rgba(0, 123, 255, 0.5);
   outline: none;
   transition: box-shadow 0.3s ease;
+  margin-bottom: 20px;
 }
 
 .big-blue-search::placeholder {
@@ -131,3 +80,186 @@ a:hover {
   box-shadow: 0 0 8px 3px #0056b3;
 }
 
+#gameList {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 30px;
+  padding: 0 10px 40px;
+}
+
+.game {
+  background-color: var(--card-bg-dark);
+  border: 3px solid var(--border-color);
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(77, 166, 255, 0.7);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+  transition: transform 0.2s ease, box-shadow 0.3s ease;
+}
+
+body.light-mode .game {
+  background-color: var(--card-bg-light);
+  box-shadow: 0 4px 15px rgba(77, 166, 255, 0.3);
+}
+
+.game:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 25px rgba(77, 166, 255, 0.8);
+}
+
+.game img {
+  width: 200px;
+  height: 200px;
+  object-fit: contain;
+  border-radius: 12px;
+  box-shadow: 0 0 15px var(--border-color);
+  transition: box-shadow 0.3s;
+}
+
+body.light-mode .game img {
+  box-shadow: 0 0 12px #3399ff;
+}
+
+.game-info h2 {
+  font-size: 34px;
+  margin: 0;
+  color: var(--border-color);
+}
+
+body.light-mode .game-info h2 {
+  color: #3399ff;
+}
+
+button.view-details {
+  margin-top: 15px;
+  cursor: pointer;
+  background-color: var(--border-color);
+  color: white;
+  border: none;
+  padding: 12px 28px;
+  border-radius: 6px;
+  font-size: 18px;
+  transition: background-color 0.3s ease;
+}
+
+button.view-details:hover {
+  background-color: #3399ff;
+}
+
+/* Modal Styles */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  left: 0; top: 0;
+  width: 100%; height: 100%;
+  overflow: auto;
+  background-color: rgba(18, 18, 18, 0.85);
+  justify-content: center;
+  align-items: center;
+}
+
+body.light-mode .modal {
+  background-color: rgba(248, 248, 248, 0.85);
+}
+
+.modal-content {
+  background-color: var(--card-bg-dark);
+  border: 2px solid var(--border-color);
+  padding: 30px;
+  border-radius: 12px;
+  max-width: 600px;
+  width: 90%;
+  color: var(--text-dark);
+  box-shadow: 0 4px 30px rgba(77, 166, 255, 0.9);
+  position: relative;
+}
+
+body.light-mode .modal-content {
+  background-color: var(--card-bg-light);
+  color: var(--text-light);
+  box-shadow: 0 4px 25px rgba(77, 166, 255, 0.5);
+}
+
+.modal-close {
+  position: absolute;
+  top: 12px;
+  right: 15px;
+  font-size: 28px;
+  font-weight: bold;
+  color: var(--border-color);
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.modal-close:hover {
+  color: #3399ff;
+}
+
+.modal-content h2 {
+  margin-top: 0;
+  margin-bottom: 15px;
+}
+
+.modal-content p,
+.modal-content ul {
+  text-align: left;
+  font-size: 18px;
+  line-height: 1.5;
+  margin-bottom: 15px;
+}
+
+.modal-content ul {
+  padding-left: 20px;
+}
+
+.modal-content a {
+  color: var(--border-color);
+  text-decoration: none;
+}
+
+.modal-content a:hover {
+  text-decoration: underline;
+}
+
+/* Scroll to top button */
+#toTopBtn {
+  display: none;
+  position: fixed;
+  bottom: 40px;
+  right: 40px;
+  z-index: 1100;
+  background-color: var(--border-color);
+  color: white;
+  border: none;
+  padding: 15px 20px;
+  border-radius: 50%;
+  font-size: 22px;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(77, 166, 255, 0.8);
+  transition: background-color 0.3s ease;
+}
+
+#toTopBtn:hover {
+  background-color: #3399ff;
+}
+
+/* Light mode toggle button */
+#modeToggle {
+  cursor: pointer;
+  background-color: var(--border-color);
+  color: white;
+  border: none;
+  padding: 10px 18px;
+  border-radius: 8px;
+  font-size: 16px;
+  margin-bottom: 25px;
+  transition: background-color 0.3s ease;
+}
+
+#modeToggle:hover {
+  background-color: #3399ff;
+}
